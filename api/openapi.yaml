@@ -43,18 +43,37 @@ paths:
           $ref: "#/components/responses/badRequestError"
         "500":
           $ref: "#/components/responses/serverError"
-  /api/v1/users/{user-id}:
+  /api/v1/message/{user-id}:
     parameters:
       - $ref: "#/components/parameters/user-id"
     get:
-      summary: Get User by ID
-      description: Get User by ID
+      summary: Get all the messages for a user
+      description: Get all the messages for a user
       tags:
-        - Users
-      operationId: get_user
+        - Message
+      operationId: get_messages
       responses:
         "200":
-          $ref: "#/components/responses/UserResponse"
+          $ref: "#/components/responses/MessagesResponse"
+        "204":
+          description: "no content"
+        "401":
+          $ref: "#/components/responses/unauthorizedError"
+        "400":
+          $ref: "#/components/responses/badRequestError"
+        "500":
+          $ref: "#/components/responses/serverError"
+    post: 
+      summary: Create an anonymous message
+      description: Create an anonymous message
+      tags: 
+       - Message
+      operationId:  create_message
+      requestBody: 
+        $ref: "#/components/requestBodies/Message"
+      responses:
+        "201":
+          description: "anonymous message succesfully created"
         "401":
           $ref: "#/components/responses/unauthorizedError"
         "400":
@@ -105,6 +124,12 @@ components:
         application/json:
           schema:
             $ref: "#/components/schemas/User"
+    MessagesResponse:
+      description: Response for anonymous message object
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Messages"
     createdResponse:
       description: "Created"
     successResponse:
@@ -168,6 +193,11 @@ components:
         application/json:
           schema:
             $ref: "#/components/schemas/UserLogin"
+    Message: 
+      content: 
+        application/json:
+          schema: 
+            $ref: "#/components/schemas/MessageRequest"
   schemas:
     User:
       type: object
@@ -210,3 +240,27 @@ components:
         password:
           type: string
           example: "userpassword82_"
+    Message:
+      type: object
+      properties:
+        message:
+          type: string
+          example: "my anonymous message to you"
+        id:
+          type: string
+          format: uuid
+          example: 724fd412-1f8b-11ec-b0b3-9801a7895a3f
+        created_at:
+          type: string
+          format: timestampz
+          example: "2024-04-17T08:47:09.547361+01:00"
+    MessageRequest: 
+      type: object
+      properties:
+        message: 
+          type: string
+          example: "my anonymous message to you"
+    Messages: 
+      type: array
+      items: 
+       $ref: "#/components/schemas/Message"

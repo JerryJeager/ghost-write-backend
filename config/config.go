@@ -6,6 +6,7 @@ import (
 
 	"os"
 
+	"github.com/JerryJeager/ghost-write-backend/models/messages"
 	"github.com/JerryJeager/ghost-write-backend/models/users"
 	"github.com/joho/godotenv"
 	"gorm.io/driver/postgres"
@@ -42,6 +43,7 @@ func ConnectToDB(){
 	}
 
 	db.AutoMigrate(users.User{})
+	db.AutoMigrate(messages.Message{})
 
 	Session =  db.Session(&gorm.Session{})
 	if Session != nil{

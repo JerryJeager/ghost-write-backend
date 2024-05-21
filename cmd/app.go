@@ -11,6 +11,7 @@ import (
 )
 
 var userController = manualwire.GetUserController()
+var messageController = manualwire.GetMessageController()
 
 func ExecuteApiRoutes() {
 
@@ -26,15 +27,20 @@ func ExecuteApiRoutes() {
 
 
 	v1 := r.Group("/api/v1")
-
 	v1.GET("/info/openapi.yaml", func(c *gin.Context) {
 		c.String(200, api.OpenApiDocs())
 	})
 
 	users := v1.Group("/users")
-
 	users.POST("/signup", userController.CreateUser)
 	users.POST("/login", userController.CreateToken)
+
+	message := v1.Group("/message")
+	message.POST("/:user-id", messageController.CreateMessage)
+
+	anonMessages := v1.Group("/message")
+	anonMessages.Use(middleware.JwtAuthMiddleware())
+	anonMessages.GET("/:user-id", messageController.GetMessages)
 
 
 	port := os.Getenv("PORT")
