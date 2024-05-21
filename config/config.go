@@ -41,8 +41,8 @@ func ConnectToDB(){
 		log.Fatal(err)
 	}
 
-	db.AutoMigrate(users.Users{})
-	
+	db.AutoMigrate(users.User{})
+
 	Session =  db.Session(&gorm.Session{})
 	if Session != nil{
 		fmt.Println("success: created db session")
