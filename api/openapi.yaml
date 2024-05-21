@@ -4,7 +4,7 @@ info:
   description: API for Ghost Write Backend
   version: "1.0"
 servers:
-  - url: "http://localhost:8080/"
+  - url: "https://ghost-write.onrender.com"
 
 paths:
   /api/v1/users/signup:
@@ -179,15 +179,12 @@ components:
         email:
           type: string
           example: "user@gmail.com"
-        first_name:
+        username: 
           type: string
-          example: "John"
-        last_name:
+          example: "indigohotdog"
+        picture:
           type: string
-          example: "Doe"
-        gender:
-          type: string
-          example: "male"
+          example: "https://link_to_profile_image.com"
         created_at:
           type: string
           format: timestampz
@@ -198,12 +195,9 @@ components:
         email:
           type: string
           example: "user@gmail.com"
-        first_name:
+        username: 
           type: string
-          example: "John"
-        last_name:
-          type: string
-          example: "Doe"
+          example: "indigohotdog"
         password:
           type: string
           example: "userpassword82_"
