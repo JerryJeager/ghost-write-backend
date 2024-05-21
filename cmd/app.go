@@ -5,12 +5,12 @@ import (
 	"os"
 
 	"github.com/JerryJeager/ghost-write-backend/api"
-	// "github.com/JerryJeager/ghost-write-backend/manualwire"
+	"github.com/JerryJeager/ghost-write-backend/manualwire"
 	"github.com/JerryJeager/ghost-write-backend/middleware"
 	"github.com/gin-gonic/gin"
 )
 
-// var userController = manualwire.GetUserController()
+var userController = manualwire.GetUserController()
 
 func ExecuteApiRoutes() {
 
@@ -30,6 +30,11 @@ func ExecuteApiRoutes() {
 	v1.GET("/info/openapi.yaml", func(c *gin.Context) {
 		c.String(200, api.OpenApiDocs())
 	})
+
+	users := v1.Group("/users")
+
+	users.POST("/signup", userController.CreateUser)
+	users.POST("/login", userController.CreateToken)
 
 
 	port := os.Getenv("PORT")
