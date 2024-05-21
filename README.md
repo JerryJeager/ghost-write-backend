@@ -1,5 +1,5 @@
 # Ghost Write backend
-The backend apis for mingle, a web application for sending out anonymous messages
+The backend apis for Ghost Write, a web application for sending out anonymous messages
 
 ## Getting started
 To run the application, you'll need Go installed on your computer...
