@@ -21,6 +21,8 @@ func NewMessageService(repo MessageStore) *MessageServ {
 }
 
 func (o *MessageServ) CreateMessage(ctx context.Context, userID uuid.UUID, message *messages.Message) error {
+	message.ID = uuid.New()
+	message.UserID = userID
 	return o.repo.CreateMessage(ctx, userID, message)
 }
 

@@ -12,7 +12,7 @@ type Message struct {
 	UpdatedAt time.Time  `json:"-"`
 	DeletedAt *time.Time `json:"-"`
 	Message   string     `json:"message" gorm:"required"`
+	UserID    uuid.UUID  `json:"user_id"`
 }
-
 
 type Messages []Message
