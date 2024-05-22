@@ -43,6 +43,24 @@ paths:
           $ref: "#/components/responses/badRequestError"
         "500":
           $ref: "#/components/responses/serverError"
+  /api/v1/users/{user-id}:
+    parameters:
+      - $ref: "#/components/parameters/user-id"
+    get:
+      summary: Get User by ID
+      description: Get User by ID
+      tags:
+        - Users
+      operationId: get_user
+      responses:
+        "200":
+          $ref: "#/components/responses/UserResponse"
+        "401":
+          $ref: "#/components/responses/unauthorizedError"
+        "400":
+          $ref: "#/components/responses/badRequestError"
+        "500":
+          $ref: "#/components/responses/serverError"
   /api/v1/message/{user-id}:
     parameters:
       - $ref: "#/components/parameters/user-id"

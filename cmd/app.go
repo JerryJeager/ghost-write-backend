@@ -34,6 +34,7 @@ func ExecuteApiRoutes() {
 	users := v1.Group("/users")
 	users.POST("/signup", userController.CreateUser)
 	users.POST("/login", userController.CreateToken)
+	users.GET("/:user-id", userController.GetUser)
 
 	message := v1.Group("/message")
 	message.POST("/:user-id", messageController.CreateMessage)
